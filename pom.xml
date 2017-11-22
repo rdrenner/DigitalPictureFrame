@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>DigitalPictureFrame</groupId>
+	<artifactId>DigitalPictureFrame</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Digitial Picture Frame</name>
+	<description>Digitial picture frame software that works with Raspberry Pi.</description>
+	<scm>
+		<url>https://github.com/rdrenner/DigitalPictureFrame</url>
+		<developerConnection>scm:git:git@github.com:rdrenner/DigitalPictureFrame.git</developerConnection>
+		<connection>scm:git:git://github.com/rdrenner/DigitalPictureFrame.git</connection>
+	</scm>
+	<url>https://github.com/rdrenner/DigitalPictureFrame</url>
+	<issueManagement>
+		<url>https://github.com/rdrenner/DigitalPictureFrame/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+	
+	<developers>
+		<developer>
+			<name>Ray Renner</name>
+			<url>https://github.com/rdrenner</url>
+		</developer>
+	</developers>
+</project>
