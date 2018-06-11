@@ -26,13 +26,13 @@
  * You can find this project at https://github.com/rdrenner/DigitalPictureFrame
  * 
  */
-package com.github.rdrenner;
+package com.github.rdrenner.DigitalPictureFrame;
 
 /**
  * @author Ray Renner
  *
  */
-public class DigitalPictureFrame
+public class PictureFrame
 {
 
    /**
