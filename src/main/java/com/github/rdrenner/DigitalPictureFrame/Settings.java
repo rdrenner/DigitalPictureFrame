@@ -44,7 +44,7 @@ public class Settings {
    private static final String PROP_CAPTION_FONT = "captionFont";
    private static final String PROP_CAPTION_FONT_SIZE = "captionFontSize";
    private static final String PROP_CAPTION_LOCATION = "captionLocation";
-   private static final String PROP_IAMGE_PATH = "imagePath";
+   private static final String PROP_IMAGE_PATH = "imagePath";
 
    private static final String PROPERTY_FILE = "DigitalPictureFrame.properties";
 
@@ -93,7 +93,7 @@ public class Settings {
          captionFont = getPropValue(PROP_CAPTION_FONT);
          captionFontSize = Integer.parseInt(getPropValue(PROP_CAPTION_FONT_SIZE));
          captionLocation = getPropValue(PROP_CAPTION_LOCATION);
-         imagePath = getPropValue(PROP_IAMGE_PATH);
+         imagePath = getPropValue(PROP_IMAGE_PATH);
 
       } catch (IOException e) {
          e.printStackTrace();
