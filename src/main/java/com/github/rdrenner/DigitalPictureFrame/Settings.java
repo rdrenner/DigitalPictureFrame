@@ -44,6 +44,7 @@ public class Settings {
    private static final String PROP_CAPTION_FONT = "captionFont";
    private static final String PROP_CAPTION_FONT_SIZE = "captionFontSize";
    private static final String PROP_CAPTION_LOCATION = "captionLocation";
+   private static final String PROP_IAMGE_PATH = "imagePath";
 
    private static final String PROPERTY_FILE = "DigitalPictureFrame.properties";
 
@@ -55,6 +56,9 @@ public class Settings {
    private String captionFont;
    private int captionFontSize;
    private String captionLocation;
+
+   //catalog seetings
+   private String imagePath;
 
    private Properties defaultProps;
    private Properties appProps;
@@ -89,6 +93,7 @@ public class Settings {
          captionFont = getPropValue(PROP_CAPTION_FONT);
          captionFontSize = Integer.parseInt(getPropValue(PROP_CAPTION_FONT_SIZE));
          captionLocation = getPropValue(PROP_CAPTION_LOCATION);
+         imagePath = getPropValue(PROP_IAMGE_PATH);
 
       } catch (IOException e) {
          e.printStackTrace();
@@ -109,6 +114,11 @@ public class Settings {
 
    public String getCaptionLocation() {
       return captionLocation;
+   }
+
+   public String getImagePath()
+   {
+      return imagePath;
    }
 
    private String getPropValue(String key) {

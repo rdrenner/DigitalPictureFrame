@@ -63,6 +63,11 @@ public class SettingsTest {
       assertEquals("Bottom", settings.getCaptionLocation(), "default captionLocation is Bottom");
    }
 
+   @Test
+   public void TestImagePath() {
+      assertEquals("Images", settings.getCaptionLocation(), "default imagePath is Images");
+   }
+
    @AfterAll
    public void tearDown() throws Exception {
 
