@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.nio.file.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author Ray Renner
@@ -49,6 +51,7 @@ public class Settings {
    private static final String PROPERTY_FILE = "DigitalPictureFrame.properties";
 
    // Digitial Picture Frame Properties
+   private static final Logger logger = LogManager.getLogger(Settings.class);
    // Picture settings
    private int duration;
 
@@ -71,7 +74,7 @@ public class Settings {
          defaultProps = new Properties();
          defaultProps.load(defaultFile);
          defaultFile.close();
-         // System.out.println("Default Properties");
+         logger.debug("Default Properties" + defaultProps.toString());
          // defaultProps.list(System.out);
 
          // Load application properties
@@ -85,7 +88,7 @@ public class Settings {
             appFile.close();
          }
 
-         // System.out.println("Application Properties");
+         logger.debug("Application Properties" + appProps.toString());
          // appProps.list(System.out);
 
          // Load properties variables
@@ -96,7 +99,7 @@ public class Settings {
          imagePath = getPropValue(PROP_IMAGE_PATH);
 
       } catch (IOException e) {
-         e.printStackTrace();
+         logger.error("IOException ", e);
       }
    }
 
@@ -125,6 +128,7 @@ public class Settings {
       if (appProps.contains(key) || defaultProps.containsKey(key)) {
          return appProps.getProperty(key);
       } else {
+         logger.error("Application Property no found: " + key);
          throw new RuntimeException("Application Property no found: " + key);
       }
    }
