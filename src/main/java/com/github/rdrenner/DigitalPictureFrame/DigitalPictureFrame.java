@@ -32,16 +32,34 @@ package com.github.rdrenner.DigitalPictureFrame;
  * @author Ray Renner
  *
  */
+
+import javax.swing.SwingUtilities;
+
 public class DigitalPictureFrame
 {
+   private static DigitalPictureFrame instance;
 
+   public static DigitalPictureFrame Instance()
+   {
+      return instance;
+   }
+
+   private void createAndShowPictureFrame()
+   {
+      PictureFrame pictFrame = new PictureFrame();
+   }
    /**
     * @param args
     */
    public static void main(String[] args)
    {
-      // TODO Auto-generated method stub
-      // Another comment
+      instance = new DigitalPictureFrame();
+
+      SwingUtilities.invokeLater(new Runnable() {
+         public void run() {
+             instance.createAndShowPictureFrame(); 
+         }
+      });
 
    }
 
