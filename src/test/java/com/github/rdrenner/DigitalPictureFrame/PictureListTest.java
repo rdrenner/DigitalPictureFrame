@@ -30,7 +30,6 @@
 package com.github.rdrenner.DigitalPictureFrame;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
