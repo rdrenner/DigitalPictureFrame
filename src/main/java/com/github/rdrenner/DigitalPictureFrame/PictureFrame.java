@@ -32,17 +32,78 @@ package com.github.rdrenner.DigitalPictureFrame;
  * @author Ray Renner
  *
  */
-public class PictureFrame
-{
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-   /**
-    * @param args
-    */
-   public static void main(String[] args)
-   {
-      // TODO Auto-generated method stub
-      // Another comment
+public class PictureFrame extends JFrame {
+   static final long serialVersionUID = 1L;
 
+   private Timer timer;
+   private Settings settings;
+   private GraphicsDevice device;
+
+   private JPanel picturePanel;
+   private JPopupMenu popupMenu;
+   private JMenuItem exit;
+
+   private Dimension screenSize;
+
+   public PictureFrame() {
+      setTitle("Digital Picture Frame");
+      settings = new Settings();
+      device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+      timer = new Timer(settings.getDuration() * 1000, new TimerListener());
+
+      picturePanel = new JPanel();
+
+      popupMenu = new JPopupMenu("Options");
+      exit = new JMenuItem("Exit");
+      popupMenu.add(exit);
+      exit.addActionListener(new OptionMenuListener());
+      picturePanel.setComponentPopupMenu(popupMenu);
+
+      setDefaultCloseOperation(EXIT_ON_CLOSE);
+      setUndecorated(true);
+      // device.setFullScreenWindow(this);
+      screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      setSize(screenSize.width, screenSize.height);
+      add(picturePanel);
+
+      this.addWindowListener(new WindowAdapter() {
+         public void windowClosing(WindowEvent e) {
+            dispose();
+            System.exit(0);
+         }
+
+         public void windowClosed(WindowEvent e) {
+            dispose();
+            System.exit(0);
+         }
+      });
+
+      setVisible(true);
+   }
+
+   class OptionMenuListener implements ActionListener {
+      public void actionPerformed(ActionEvent event) {
+         Object obj = event.getSource();
+
+         if (obj == exit) {
+            dispose();
+            System.exit(0);
+         }
+      }
+   }
+
+   class TimerListener implements ActionListener {
+      public void actionPerformed(ActionEvent event) {
+         Object obj = event.getSource();
+
+         if (obj == timer) {
+            // TODO - Load picture
+         }
+      }
    }
 
 }

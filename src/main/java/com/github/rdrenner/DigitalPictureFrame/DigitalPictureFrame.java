@@ -34,10 +34,16 @@ package com.github.rdrenner.DigitalPictureFrame;
  */
 
 import javax.swing.SwingUtilities;
+import java.awt.GraphicsEnvironment;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DigitalPictureFrame
 {
    private static DigitalPictureFrame instance;
+
+   private static final Logger logger = LogManager.getLogger(DigitalPictureFrame.class);
 
    public static DigitalPictureFrame Instance()
    {
@@ -55,12 +61,19 @@ public class DigitalPictureFrame
    {
       instance = new DigitalPictureFrame();
 
-      SwingUtilities.invokeLater(new Runnable() {
-         public void run() {
-             instance.createAndShowPictureFrame(); 
-         }
-      });
-
+      if (GraphicsEnvironment.isHeadless())
+      {
+         logger.error("No monitor detected.");
+         System.exit(0);
+      }
+      else
+      {
+         SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+               instance.createAndShowPictureFrame(); 
+            }
+         });
+      }
    }
 
 }
