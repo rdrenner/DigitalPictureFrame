@@ -58,7 +58,7 @@
                      <addClasspath>true</addClasspath>
                      <classpathPrefix>libs/</classpathPrefix>
                      <mainClass>
-							com.github.rdrenner.DigitialPictureFrame.PictureFrame
+							com.github.rdrenner.DigitialPictureFrame.DigitalPictureFrame
                      </mainClass>
                   </manifest>
                </archive>
