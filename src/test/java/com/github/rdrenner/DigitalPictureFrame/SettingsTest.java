@@ -65,7 +65,17 @@ public class SettingsTest {
 
    @Test
    public void TestImagePath() {
-      assertEquals("Images", settings.getImagePath(), "default imagePath is Images");
+      assertEquals("/Images", settings.getImagePath(), "default imagePath is /Images");
+   }
+
+   @Test
+   public void TestSampleImagePath() {
+      assertEquals("/SampleImages", settings.getSampleImagePath(), "default sampleImagePath is /SampleImages");
+   }
+
+   @Test
+   public void TestUseSampleImages() {
+      assertEquals(true, settings.getUseSampleImages(), "default useSampleImages is true");
    }
 
    @AfterAll

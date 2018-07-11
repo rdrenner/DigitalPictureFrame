@@ -47,6 +47,9 @@ public class Settings {
    private static final String PROP_CAPTION_FONT_SIZE = "captionFontSize";
    private static final String PROP_CAPTION_LOCATION = "captionLocation";
    private static final String PROP_IMAGE_PATH = "imagePath";
+   private static final String PROP_SAMPLE_IMAGE_PATH = "sampleImagePath";
+   private static final String PROP_USE_SAMPLE_IMAGES = "useSampleImages";
+
 
    private static final String PROPERTY_FILE = "DigitalPictureFrame.properties";
 
@@ -62,6 +65,8 @@ public class Settings {
 
    //catalog seetings
    private String imagePath;
+   private String sampleImagePath;
+   private Boolean useSampleImages;
 
    private Properties defaultProps;
    private Properties appProps;
@@ -97,6 +102,9 @@ public class Settings {
          captionFontSize = Integer.parseInt(getPropValue(PROP_CAPTION_FONT_SIZE));
          captionLocation = getPropValue(PROP_CAPTION_LOCATION);
          imagePath = getPropValue(PROP_IMAGE_PATH);
+         sampleImagePath = getPropValue(PROP_SAMPLE_IMAGE_PATH);
+         useSampleImages = Boolean.valueOf(getPropValue(PROP_USE_SAMPLE_IMAGES));
+
 
       } catch (IOException e) {
          logger.error("IOException ", e);
@@ -122,6 +130,16 @@ public class Settings {
    public String getImagePath()
    {
       return imagePath;
+   }
+
+   public String getSampleImagePath()
+   {
+      return sampleImagePath;
+   }
+
+   public Boolean getUseSampleImages()
+   {
+      return useSampleImages;
    }
 
    private String getPropValue(String key) {

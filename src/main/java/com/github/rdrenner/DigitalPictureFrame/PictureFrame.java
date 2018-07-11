@@ -35,15 +35,19 @@ package com.github.rdrenner.DigitalPictureFrame;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PictureFrame extends JFrame {
    static final long serialVersionUID = 1L;
+   private static final Logger logger = LogManager.getLogger(PictureFrame.class);
 
    private Timer timer;
    private Settings settings;
    private GraphicsDevice device;
 
-   private JPanel picturePanel;
+//   private JPanel picturePanel;
+   private PicturePanel picturePanel;
    private JPopupMenu popupMenu;
    private JMenuItem exit;
 
@@ -55,7 +59,7 @@ public class PictureFrame extends JFrame {
       device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
       timer = new Timer(settings.getDuration() * 1000, new TimerListener());
 
-      picturePanel = new JPanel();
+      picturePanel = new PicturePanel();
 
       popupMenu = new JPopupMenu("Options");
       exit = new JMenuItem("Exit");
@@ -67,8 +71,12 @@ public class PictureFrame extends JFrame {
       setUndecorated(true);
       // device.setFullScreenWindow(this);
       screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-      setSize(screenSize.width, screenSize.height);
+      logger.info("Screen Size is: {}", screenSize);
+      setSize(screenSize);
+      picturePanel.setPreferredSize(screenSize);
       add(picturePanel);
+
+      picturePanel.setBackground(Color.BLACK);
 
       this.addWindowListener(new WindowAdapter() {
          public void windowClosing(WindowEvent e) {
@@ -90,6 +98,7 @@ public class PictureFrame extends JFrame {
          Object obj = event.getSource();
 
          if (obj == exit) {
+            logger.info("Exit Menu Selected. Exiting.");
             dispose();
             System.exit(0);
          }

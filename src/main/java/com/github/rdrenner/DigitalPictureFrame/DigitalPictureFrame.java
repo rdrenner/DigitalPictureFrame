@@ -52,6 +52,7 @@ public class DigitalPictureFrame
 
    private void createAndShowPictureFrame()
    {
+      logger.info("Picture Frame Loading");
       PictureFrame pictFrame = new PictureFrame();
    }
    /**
