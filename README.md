@@ -1,5 +1,5 @@
 # DigitalPictureFrame
 
-Digital Picture Frame for Raspberry Pi (Under Construction)
+https://sonarcloud.io/api/project_badges/measure?project=rdrenner_DigitalPictureFrame&metric=alert_status
 
-Starting work soon.
+Digital Picture Frame for Raspberry Pi (Under Construction)
