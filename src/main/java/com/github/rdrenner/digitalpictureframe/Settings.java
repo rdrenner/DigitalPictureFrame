@@ -54,6 +54,7 @@ public class Settings {
    private static final String PROPERTY_FILE = "DigitalPictureFrame.properties";
 
    // Digitial Picture Frame Properties
+   static final long serialVersionUID = 1L;
    private static final Logger logger = LogManager.getLogger(Settings.class);
    // Picture settings
    private int duration;
@@ -85,7 +86,7 @@ public class Settings {
          // Load application properties
          appProps = new Properties(defaultProps);
          Path appPropPath = Paths.get(PROPERTY_FILE);
-         if (Files.exists(appPropPath)) {
+         if (appPropPath.toFile().exists()) {
             FileInputStream appFile = new FileInputStream(PROPERTY_FILE);
             if (appFile != null) {
                appProps.load(appFile);

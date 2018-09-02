@@ -61,7 +61,7 @@
                   </goals>
                   <configuration>
                      <outputDirectory>
-                    ${project.build.directory}/libs
+                        ${project.build.directory}/libs
                      </outputDirectory>
                   </configuration>
                </execution>

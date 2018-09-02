@@ -44,7 +44,7 @@ public class PictureFrame extends JFrame {
 
    private Timer timer;
    private Settings settings;
-   private GraphicsDevice device;
+//   private GraphicsDevice device;
 
 //   private JPanel picturePanel;
    private PicturePanel picturePanel;
@@ -56,7 +56,7 @@ public class PictureFrame extends JFrame {
    public PictureFrame() {
       setTitle("Digital Picture Frame");
       settings = new Settings();
-      device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+//      device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
       timer = new Timer(settings.getDuration() * 1000, new TimerListener());
 
       picturePanel = new PicturePanel();
@@ -79,11 +79,13 @@ public class PictureFrame extends JFrame {
       picturePanel.setBackground(Color.BLACK);
 
       this.addWindowListener(new WindowAdapter() {
+         @Override
          public void windowClosing(WindowEvent e) {
             dispose();
             System.exit(0);
          }
 
+         @Override
          public void windowClosed(WindowEvent e) {
             dispose();
             System.exit(0);

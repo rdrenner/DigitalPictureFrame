@@ -40,7 +40,7 @@ public class PictureList
 
    PictureList()
    {
-      this.pictures = new ArrayList<Picture>(100);
+      this.pictures = new ArrayList<>(100);
    }
 
    public void addPicture (Picture pict)

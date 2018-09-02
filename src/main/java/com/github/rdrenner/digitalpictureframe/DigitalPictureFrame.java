@@ -45,7 +45,7 @@ public class DigitalPictureFrame
 
    private static final Logger logger = LogManager.getLogger(DigitalPictureFrame.class);
 
-   public static DigitalPictureFrame Instance()
+   public static DigitalPictureFrame instance()
    {
       return instance;
    }
