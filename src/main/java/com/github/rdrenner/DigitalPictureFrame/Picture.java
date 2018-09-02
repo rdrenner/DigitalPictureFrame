@@ -45,6 +45,12 @@ public class Picture {
       this.caption = caption;
    }
 
+   Picture(String filename)
+   {
+      this.filename = filename;
+      this.caption = null;
+   }
+
    public String getFilename() {
       return filename;
    }
