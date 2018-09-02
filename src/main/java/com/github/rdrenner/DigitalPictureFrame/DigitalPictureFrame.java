@@ -26,7 +26,7 @@
  * You can find this project at https://github.com/rdrenner/DigitalPictureFrame
  * 
  */
-package com.github.rdrenner.DigitalPictureFrame;
+package com.github.rdrenner.digitalpictureframe;
 
 /**
  * @author Ray Renner

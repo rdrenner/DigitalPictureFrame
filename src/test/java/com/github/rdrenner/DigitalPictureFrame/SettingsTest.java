@@ -27,7 +27,7 @@
  * 
  */
 
-package com.github.rdrenner.DigitalPictureFrame;
+package com.github.rdrenner.digitalpictureframe;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
