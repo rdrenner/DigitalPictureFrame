@@ -70,7 +70,7 @@ public class SettingsTest {
 
    @Test
    public void TestSampleImagePath() {
-      assertEquals("/SampleImages", settings.getSampleImagePath(), "default sampleImagePath is /SampleImages");
+      assertEquals("./SampleImages", settings.getSampleImagePath(), "default sampleImagePath is /SampleImages");
    }
 
    @Test

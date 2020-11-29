@@ -5,23 +5,20 @@
  * 
  * MIT License
  * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
  * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+ * NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * You can find this project at https://github.com/rdrenner/DigitalPictureFrame
  * 
@@ -38,6 +35,7 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import org.apache.logging.log4j.LogManager;
@@ -50,6 +48,9 @@ public class PicturePanel extends JPanel {
 
    private BufferedImage image;
    private Dimension screenSize;
+   private Picture pict;
+   private PictureList pictList;
+   private Random rand;
 
    private static BufferedImage resize(BufferedImage img, int height, int width) {
       Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -69,7 +70,8 @@ public class PicturePanel extends JPanel {
     *
     * @return The scaled image
     */
-   public static BufferedImage scaleImage(BufferedImage image, int imageType, int newWidth, int newHeight) {
+   public static BufferedImage scaleImage(BufferedImage image, int imageType, int newWidth,
+         int newHeight) {
       try {
          // Make sure the aspect ratio is maintained, so the image is not distorted
          logger.info("Scaling the image to {} x {}", newWidth, newHeight);
@@ -87,7 +89,8 @@ public class PicturePanel extends JPanel {
          // Draw the scaled image
          BufferedImage newImage = new BufferedImage(newWidth, newHeight, imageType);
          Graphics2D graphics2D = newImage.createGraphics();
-         graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+         graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+               RenderingHints.VALUE_INTERPOLATION_BILINEAR);
          graphics2D.drawImage(image, 0, 0, newWidth, newHeight, null);
 
          return newImage;
@@ -97,11 +100,15 @@ public class PicturePanel extends JPanel {
       }
    }
 
-   public PicturePanel() {
+   public PicturePanel(Picture pict) {
+      super();
       try {
+         this.pict = pict;
+         this.pictList = null;
+         rand = new Random();
          logger.info("Creating PicturePanel.");
          screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-         image = scaleImage(ImageIO.read(new File("e:\\Dev\\SampleImages\\Owl1.jpg")), BufferedImage.TYPE_INT_RGB,
+         image = scaleImage(ImageIO.read(new File(pict.getFilename())), BufferedImage.TYPE_INT_RGB,
                screenSize.width, screenSize.height);
       } catch (IOException ex) {
          logger.error("Error reading image file: ", ex);
@@ -109,21 +116,47 @@ public class PicturePanel extends JPanel {
       }
    }
 
+   public PicturePanel(PictureList list) {
+      super();
+      this.pictList = list;
+      rand = new Random();
+
+      logger.info("Creating PicturePanel.");
+      screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      nextPicture();
+   }
+
+   public void nextPicture() {
+
+      try {
+         int numPict = pictList.getNumberPictures();
+         if (numPict > 0) {
+            pict = pictList.getPicture(rand.nextInt(pictList.getNumberPictures()));
+            logger.info("Getting next picture: {}", pict.getFilename());
+            image = scaleImage(ImageIO.read(new File(pict.getFilename())),
+                  BufferedImage.TYPE_INT_RGB, screenSize.width, screenSize.height);
+         } else {
+            logger.error("Picture list is empty.");
+         }
+      } catch (IOException ex) {
+         logger.error("Error reading image file: ", ex);
+      }
+
+   }
+
    @Override
    protected void paintComponent(Graphics g) {
       int x = 0;
       int y = 0;
 
-      if (screenSize.height != image.getHeight())
-      {
-         //Let's center it
-         x = (screenSize.height - image.getHeight())/2;
+      if (screenSize.height != image.getHeight()) {
+         // Let's center it
+         x = (screenSize.height - image.getHeight()) / 2;
       }
 
-      if (screenSize.width != image.getWidth())
-      {
-         //Let's center it
-         x = (screenSize.width - image.getWidth())/2;
+      if (screenSize.width != image.getWidth()) {
+         // Let's center it
+         x = (screenSize.width - image.getWidth()) / 2;
       }
 
       logger.info("Drawing Picture Image.");

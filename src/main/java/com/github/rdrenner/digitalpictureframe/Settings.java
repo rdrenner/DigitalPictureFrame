@@ -31,6 +31,7 @@ package com.github.rdrenner.digitalpictureframe;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Properties;
 import java.nio.file.*;
 import org.apache.logging.log4j.LogManager;
@@ -40,7 +41,7 @@ import org.apache.logging.log4j.Logger;
  * @author Ray Renner
  *
  */
-public class Settings {
+public class Settings implements Serializable {
    // Static property keys
    private static final String PROP_PICTURE_DURATION = "duration";
    private static final String PROP_CAPTION_FONT = "captionFont";
@@ -53,7 +54,7 @@ public class Settings {
 
    private static final String PROPERTY_FILE = "DigitalPictureFrame.properties";
 
-   // Digitial Picture Frame Properties
+   // Digital Picture Frame Properties
    static final long serialVersionUID = 1L;
    private static final Logger logger = LogManager.getLogger(Settings.class);
    // Picture settings
@@ -64,10 +65,10 @@ public class Settings {
    private int captionFontSize;
    private String captionLocation;
 
-   //catalog seetings
+   //catalog settings
    private String imagePath;
    private String sampleImagePath;
-   private Boolean useSampleImages;
+   private boolean useSampleImages;
 
    private Properties defaultProps;
    private Properties appProps;
@@ -80,22 +81,18 @@ public class Settings {
          defaultProps = new Properties();
          defaultProps.load(defaultFile);
          defaultFile.close();
-         logger.debug("Default Properties" + defaultProps.toString());
-         // defaultProps.list(System.out);
+         logger.debug("Default Properties: {}", defaultProps);
 
          // Load application properties
          appProps = new Properties(defaultProps);
          Path appPropPath = Paths.get(PROPERTY_FILE);
          if (appPropPath.toFile().exists()) {
             FileInputStream appFile = new FileInputStream(PROPERTY_FILE);
-            if (appFile != null) {
-               appProps.load(appFile);
-            }
+            appProps.load(appFile);
             appFile.close();
          }
 
-         logger.debug("Application Properties" + appProps.toString());
-         // appProps.list(System.out);
+         logger.debug("Application Properties: {}", appProps);
 
          // Load properties variables
          duration = Integer.parseInt(getPropValue(PROP_PICTURE_DURATION));
@@ -138,16 +135,16 @@ public class Settings {
       return sampleImagePath;
    }
 
-   public Boolean getUseSampleImages()
+   public boolean getUseSampleImages()
    {
       return useSampleImages;
    }
 
    private String getPropValue(String key) {
-      if (appProps.contains(key) || defaultProps.containsKey(key)) {
+      if (appProps.containsKey(key) || defaultProps.containsKey(key)) {
          return appProps.getProperty(key);
       } else {
-         logger.error("Application Property no found: " + key);
+         logger.error("Application Property no found: {}", key);
          throw new RuntimeException("Application Property no found: " + key);
       }
    }

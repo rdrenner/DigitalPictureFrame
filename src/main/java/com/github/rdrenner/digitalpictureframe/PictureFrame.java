@@ -48,6 +48,7 @@ public class PictureFrame extends JFrame {
 
 //   private JPanel picturePanel;
    private PicturePanel picturePanel;
+   private PictureList pictureList;
    private JPopupMenu popupMenu;
    private JMenuItem exit;
 
@@ -59,7 +60,9 @@ public class PictureFrame extends JFrame {
 //      device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
       timer = new Timer(settings.getDuration() * 1000, new TimerListener());
 
-      picturePanel = new PicturePanel();
+      pictureList = new PictureList (settings);
+      pictureList.loadCatalog();
+      picturePanel = new PicturePanel(pictureList);
 
       popupMenu = new JPopupMenu("Options");
       exit = new JMenuItem("Exit");
@@ -93,6 +96,7 @@ public class PictureFrame extends JFrame {
       });
 
       setVisible(true);
+      timer.start();
    }
 
    class OptionMenuListener implements ActionListener {
@@ -112,8 +116,9 @@ public class PictureFrame extends JFrame {
          Object obj = event.getSource();
 
          if (obj == timer) {
-            // TODO - Load picture
+            picturePanel.nextPicture();
          }
+         repaint();
       }
    }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="info">
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{1}:%L - %msg%n" />
@@ -20,10 +20,10 @@
 	</Appenders>
 	
 	<Loggers>
-		<Logger name="com.github.rdrenner" level="warn" >
-			<appender-ref ref="file-log" level="warn" />
+		<Logger name="com.github.rdrenner" level="info" >
+			<appender-ref ref="file-log" level="info" />
 		</Logger>
-		<Root level="warn">
+		<Root level="info">
 			<AppenderRef ref="Console" />
 		</Root>
 	</Loggers>

@@ -2,13 +2,13 @@
 <Configuration status="INFO">
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{1}:%L - %msg%n" />
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{10}:%L - %msg%n" />
 		</Console>
 
 		<RollingFile name="file-log" fileName="digitalPictureFrame.log"
 			filePattern="./logs/digitalPictureFrame-%d{yyyy-MM-dd}.log">
 			<PatternLayout>
-				<pattern>%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1}:%L - %msg%n
+				<pattern>%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{10}:%L - %msg%n
 				</pattern>
 			</PatternLayout>
 			<Policies>
@@ -20,10 +20,10 @@
 	</Appenders>
 	
 	<Loggers>
-		<Logger name="com.github.rdrenner" level="info" >
-			<appender-ref ref="file-log" level="info" />
+		<Logger name="com.github.rdrenner" level="debug" >
+			<appender-ref ref="file-log" level="debug" />
 		</Logger>
-		<Root level="info">
+		<Root level="error">
 			<AppenderRef ref="Console" />
 		</Root>
 	</Loggers>
