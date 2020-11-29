@@ -173,7 +173,6 @@
       <sonar.organization>rdrenner-github</sonar.organization>
       <sonar.host.url>https://sonarcloud.io</sonar.host.url>
       <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
-      <sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
    </properties>
 
    <dependencies>
