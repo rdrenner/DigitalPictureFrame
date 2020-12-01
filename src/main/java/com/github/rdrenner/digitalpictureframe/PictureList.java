@@ -69,13 +69,12 @@ public class PictureList implements Serializable {
    public void loadCatalog() {
       try {
          if (settings.getUseSampleImages()) {
-            ClassLoader classLoader = getClass().getClassLoader();
-            URL resource = classLoader.getResource(settings.getSampleImagePath());
+            String sampleImagePath = settings.getSampleImagePath();
 
-            if (resource == null) {
-               logger.error("SampleImages resource not found.");
+            if (sampleImagePath == null) {
+               logger.error("SampleImages resource not found: {}", sampleImagePath);
             } else {
-               Files.walkFileTree(Paths.get(resource.toURI()), new CatalogTraverse());
+               Files.walkFileTree(Paths.get(sampleImagePath), new CatalogTraverse());
             }
 
 
