@@ -5,23 +5,20 @@
  * 
  * MIT License
  * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
  * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+ * NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * You can find this project at https://github.com/rdrenner/DigitalPictureFrame
  * 
@@ -44,9 +41,9 @@ public class PictureFrame extends JFrame {
 
    private Timer timer;
    private Settings settings;
-//   private GraphicsDevice device;
+   private GraphicsDevice device;
 
-//   private JPanel picturePanel;
+   // private JPanel picturePanel;
    private PicturePanel picturePanel;
    private PictureList pictureList;
    private JPopupMenu popupMenu;
@@ -57,10 +54,10 @@ public class PictureFrame extends JFrame {
    public PictureFrame() {
       setTitle("Digital Picture Frame");
       settings = new Settings();
-//      device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+      device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
       timer = new Timer(settings.getDuration() * 1000, new TimerListener());
 
-      pictureList = new PictureList (settings);
+      pictureList = new PictureList(settings);
       pictureList.loadCatalog();
       picturePanel = new PicturePanel(pictureList);
 
@@ -72,7 +69,11 @@ public class PictureFrame extends JFrame {
 
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       setUndecorated(true);
-      // device.setFullScreenWindow(this);
+
+      if (device.isFullScreenSupported()) {
+         logger.info("Full Screen is supported.");
+         device.setFullScreenWindow(this);
+      }
       screenSize = Toolkit.getDefaultToolkit().getScreenSize();
       logger.info("Screen Size is: {}", screenSize);
       setSize(screenSize);
