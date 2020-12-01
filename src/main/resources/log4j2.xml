@@ -5,7 +5,7 @@
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{10}:%L - %msg%n" />
 		</Console>
 
-		<RollingFile name="file-log" fileName="digitalPictureFrame.log"
+		<RollingFile name="file-log" fileName="./logs/digitalPictureFrame.log"
 			filePattern="./logs/digitalPictureFrame-%d{yyyy-MM-dd}.log">
 			<PatternLayout>
 				<pattern>%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{10}:%L - %msg%n
