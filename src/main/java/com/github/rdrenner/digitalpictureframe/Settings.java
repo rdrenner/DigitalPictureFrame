@@ -50,7 +50,7 @@ public class Settings implements Serializable {
 
 
    private static final String PROPERTY_FILE = "DigitalPictureFrame.properties";
-   private static final String CONFIG_FOLDER = "./CONF/";
+   private static final String CONFIG_FOLDER = "./conf/";
 
    // Digital Picture Frame Properties
    static final long serialVersionUID = 1L;
@@ -90,7 +90,6 @@ public class Settings implements Serializable {
          if (appPropPath.toFile().exists()) {
             try (FileInputStream appFile = new FileInputStream(appPropFile)) {
                appProps.load(appFile);
-               appFile.close();
             } catch (IOException e) {
                logger.error("IOException ", e);
             }
