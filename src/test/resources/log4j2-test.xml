@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="info">
+<Configuration status="INFO">
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{1}:%L - %msg%n" />
+			<PatternLayout pattern="%style{%d{HH:mm:ss.SSS}{DEFAULT}}{yellow} [%t] %highlight{%-5level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} %logger{1}:%L - %msg%n" />
 		</Console>
 
-		<RollingFile name="file-log" fileName="./logs/digitalPictureFrame.log"
-			filePattern="./logs/digitalPictureFrame-%d{yyyy-MM-dd}.log">
+		<RollingFile name="file-log" fileName="./logs/digitalPictureFrame-Test.log"
+			filePattern="./logs/digitalPictureFrame-Test-%d{yyyy-MM-dd}.log">
 			<PatternLayout>
-				<pattern>%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1}:%L - %msg%n
+				<pattern>%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{10}:%L - %msg%n
 				</pattern>
 			</PatternLayout>
 			<Policies>
@@ -18,13 +18,14 @@
 		</RollingFile>
 
 	</Appenders>
-	
+
 	<Loggers>
-		<Logger name="com.github.rdrenner" level="info" >
-			<appender-ref ref="file-log" level="info" />
-		</Logger>
-		<Root level="info">
+		<Root level="ERROR">
 			<AppenderRef ref="Console" />
 		</Root>
+		<Logger name="com.github.rdrenner" level="DEBUG">
+			<appender-ref ref="file-log" level="DEBUG" />
+		</Logger>
+
 	</Loggers>
 </Configuration>

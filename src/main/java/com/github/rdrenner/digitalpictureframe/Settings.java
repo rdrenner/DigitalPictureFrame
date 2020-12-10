@@ -74,6 +74,7 @@ public class Settings implements Serializable {
    Settings() {
       try {
 
+         logger.info("Getting Settings");
          // Load default properties
          ClassLoader classLoader = getClass().getClassLoader();
          InputStream defaultFile = classLoader.getResourceAsStream(PROPERTY_FILE);
