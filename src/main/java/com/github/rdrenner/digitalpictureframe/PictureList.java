@@ -79,6 +79,16 @@ public class PictureList implements Serializable {
 
 
          }
+
+         String imagePath = settings.getImagePath();
+         if (imagePath == null) {
+            logger.error("Images resource not found: {}", imagePath);
+         } else {
+            Files.walkFileTree(Paths.get(imagePath), new CatalogTraverse());
+         }
+
+         logger.info("{} images loaded into list for display.", pictures.size());
+
       } catch (Exception ex) {
          logger.error("Error loading images: ", ex);
       }
