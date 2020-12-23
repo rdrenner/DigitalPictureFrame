@@ -33,10 +33,7 @@ package com.github.rdrenner.digitalpictureframe;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,68 +49,14 @@ public class PicturePanel extends JPanel {
    private PictureList pictList;
    private Random rand;
 
-   private static BufferedImage resize(BufferedImage img, int height, int width) {
-      Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-      BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-      Graphics2D g2d = resized.createGraphics();
-      g2d.drawImage(tmp, 0, 0, null);
-      g2d.dispose();
-      return resized;
-   }
-
-   /**
-    *
-    * @param image     The image to be scaled
-    * @param imageType Target image type, e.g. TYPE_INT_RGB
-    * @param newWidth  The required width
-    * @param newHeight The required width
-    *
-    * @return The scaled image
-    */
-   public static BufferedImage scaleImage(BufferedImage image, int imageType, int newWidth,
-         int newHeight) {
-      try {
-         // Make sure the aspect ratio is maintained, so the image is not distorted
-         logger.info("Scaling the image to {} x {}", newWidth, newHeight);
-         double thumbRatio = (double) newWidth / (double) newHeight;
-         int imageWidth = image.getWidth(null);
-         int imageHeight = image.getHeight(null);
-         double aspectRatio = (double) imageWidth / (double) imageHeight;
-
-         if (thumbRatio < aspectRatio) {
-            newHeight = (int) (newWidth / aspectRatio);
-         } else {
-            newWidth = (int) (newHeight * aspectRatio);
-         }
-
-         // Draw the scaled image
-         BufferedImage newImage = new BufferedImage(newWidth, newHeight, imageType);
-         Graphics2D graphics2D = newImage.createGraphics();
-         graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-               RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-         graphics2D.drawImage(image, 0, 0, newWidth, newHeight, null);
-
-         return newImage;
-      } catch (Exception e) {
-         logger.error("Error resizing image.", e);
-         throw e;
-      }
-   }
-
    public PicturePanel(Picture pict) {
       super();
-      try {
-         this.pict = pict;
-         this.pictList = null;
-         rand = new Random();
-         logger.info("Creating PicturePanel.");
-         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-         image = scaleImage(ImageIO.read(new File(pict.getFilename())), BufferedImage.TYPE_INT_RGB,
-               screenSize.width, screenSize.height);
-      } catch (IOException ex) {
-         logger.error("Error reading image file: ", ex);
-
-      }
+      this.pict = pict;
+      this.pictList = null;
+      rand = new Random();
+      logger.info("Creating PicturePanel.");
+      screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      image = pict.getScaledImage(screenSize.width, screenSize.height);
    }
 
    public PicturePanel(PictureList list) {
@@ -128,18 +71,13 @@ public class PicturePanel extends JPanel {
 
    public void nextPicture() {
 
-      try {
-         int numPict = pictList.getNumberPictures();
-         if (numPict > 0) {
-            pict = pictList.getPicture(rand.nextInt(pictList.getNumberPictures()));
-            logger.info("Getting next picture: {}", pict.getFilename());
-            image = scaleImage(ImageIO.read(new File(pict.getFilename())),
-                  BufferedImage.TYPE_INT_RGB, screenSize.width, screenSize.height);
-         } else {
-            logger.error("Picture list is empty.");
-         }
-      } catch (IOException ex) {
-         logger.error("Error reading image file: ", ex);
+      int numPict = pictList.getNumberPictures();
+      if (numPict > 0) {
+         pict = pictList.getPicture(rand.nextInt(pictList.getNumberPictures()));
+         logger.info("Getting next picture: {}", pict.getFilename());
+         image = pict.getScaledImage(screenSize.width, screenSize.height);
+      } else {
+         logger.error("Picture list is empty.");
       }
 
    }
@@ -151,7 +89,7 @@ public class PicturePanel extends JPanel {
 
       if (screenSize.height != image.getHeight()) {
          // Let's center it
-         x = (screenSize.height - image.getHeight()) / 2;
+         y = (screenSize.height - image.getHeight()) / 2;
       }
 
       if (screenSize.width != image.getWidth()) {
@@ -159,7 +97,7 @@ public class PicturePanel extends JPanel {
          x = (screenSize.width - image.getWidth()) / 2;
       }
 
-      logger.info("Drawing Picture Image.");
+      logger.info("Drawing Picture Image at ({},{}).", x, y);
       super.paintComponent(g);
       g.drawImage(image, x, y, this); // see javadoc for more info on the parameters
    }

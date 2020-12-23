@@ -87,6 +87,7 @@ public class Settings implements Serializable {
          appProps = new Properties(defaultProps);
          String appPropFile = CONFIG_FOLDER + PROPERTY_FILE;
          Path appPropPath = Paths.get(appPropFile);
+         logger.debug("Application Property Path is {}", appPropPath);
          if (appPropPath.toFile().exists()) {
             try (FileInputStream appFile = new FileInputStream(appPropFile)) {
                appProps.load(appFile);
