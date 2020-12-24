@@ -22,7 +22,7 @@
          "cwd": "${workspaceFolder}",
          "console": "internalConsole",
          "stopOnEntry": false,
-         "mainClass": "com.github.rdrenner.DigitalPictureFrame.DigitalPictureFrame",
+         "mainClass": "com.github.rdrenner.digitalpictureframe.DigitalPictureFrame",
          "projectName": "DigitalPictureFrame",
          "args": ""
       },

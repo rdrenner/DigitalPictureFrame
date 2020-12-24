@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class PictureTest {
+class PictureTest {
    private Picture pict1;
    private Picture pict2;
    private Picture pict3;
@@ -46,7 +46,7 @@ public class PictureTest {
    private Picture pict6;
 
    @BeforeAll 
-   public void setUp() throws Exception {
+   void setUp() throws Exception {
       pict1 = new Picture("picture1.jpg", "Test Picture");
       pict2 = new Picture();
       pict3 = new Picture("./SampleImages/Owl1.jpg");
@@ -56,7 +56,7 @@ public class PictureTest {
    }
 
    @Test
-   public void TestSetandGetFilename() {
+   void TestSetAndGetFilename() {
       assertEquals("picture1.jpg", pict1.getFilename(), "pict1.filename is picture1.jpg");
       assertNull(pict2.getFilename(), "pict2.filename is null");
       pict1.setFilename("picture1a.jpg");
@@ -64,7 +64,7 @@ public class PictureTest {
    }
 
    @Test
-   public void TestSetAndGetCaption() {
+   void TestSetAndGetCaption() {
       assertEquals("Test Picture", pict1.getCaption(), "pict1.caption is Test Picture");
       assertNull(pict2.getCaption(), "pict2.caption is null");
       pict1.setCaption("Test Picture 1a");
@@ -72,7 +72,7 @@ public class PictureTest {
    }
 
    @Test
-   public void TestGetMetadata() {
+   void TestGetMetadata() {
       assertNotNull(pict3.getMetadata(), "Pict3 metadata should not be null.");
       assertNotNull(pict4.getMetadata(), "Pict4 metadata should not be null.");
       assertNotNull(pict5.getMetadataString(), "Pict5 metadata should not be null.");
@@ -80,7 +80,7 @@ public class PictureTest {
    }
 
    @Test
-   public void TestGetOrientation() {
+   void TestGetOrientation() {
 
       assertEquals(1, pict3.getOrientation(), "Orientation should be 1.");
       assertEquals(1, pict4.getOrientation(), "Orientation should be 1.");
@@ -90,12 +90,12 @@ public class PictureTest {
    }
 
    @Test
-   public void TestGetImage() {
+   void TestGetImage() {
       assertNotNull(pict3.getImage(), "Pict3 image should not be null.");
    }
 
    @Test
-   public void TestGetScaledImage() {
+   void TestGetScaledImage() {
       assertNotNull(pict3.getScaledImage(1920, 780), "Pict3 scaled image should not be null.");
       assertNotNull(pict4.getScaledImage(1920, 780), "Pict4 scaled image should not be null.");
       assertNotNull(pict5.getScaledImage(1920, 780), "Pict5 scaled image should not be null.");
@@ -103,7 +103,7 @@ public class PictureTest {
    }
 
    @AfterAll
-   public void tearDown() throws Exception {
+   void tearDown() throws Exception {
 
    }
 }

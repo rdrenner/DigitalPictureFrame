@@ -35,51 +35,51 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class SettingsTest {
+class SettingsTest {
    private Settings settings;
 
    @BeforeAll 
-   public void setUp() throws Exception {
+   void setUp() throws Exception {
       settings = new Settings();
    }
 
    @Test
-   public void TestDuration() {
+   void TestDuration() {
       assertEquals(20, settings.getDuration(), "default duration is 20");
    }
 
    @Test
-   public void TestCaptionFont() {
+   void TestCaptionFont() {
       assertEquals("Calibri", settings.getCaptionFont(), "default captionFOnt is Calibri");
    }
 
    @Test
-   public void TestCaptionFontSize() {
+   void TestCaptionFontSize() {
       assertEquals(12, settings.getCaptionFontSize(), "default captionFontSize is 12");
    }
 
    @Test
-   public void TestCaptionLocation() {
+   void TestCaptionLocation() {
       assertEquals("Bottom", settings.getCaptionLocation(), "default captionLocation is Bottom");
    }
 
    @Test
-   public void TestImagePath() {
+   void TestImagePath() {
       assertEquals("./Images", settings.getImagePath(), "default imagePath is ./Images");
    }
 
    @Test
-   public void TestSampleImagePath() {
+   void TestSampleImagePath() {
       assertEquals("./SampleImages", settings.getSampleImagePath(), "default sampleImagePath is /SampleImages");
    }
 
    @Test
-   public void TestUseSampleImages() {
+   void TestUseSampleImages() {
       assertEquals(true, settings.getUseSampleImages(), "default useSampleImages is true");
    }
 
    @AfterAll
-   public void tearDown() throws Exception {
+   void tearDown() throws Exception {
 
    }
 }

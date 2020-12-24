@@ -32,17 +32,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class PictureListTest {
+class PictureListTest {
    private PictureList list;
    private Settings settings;
 
    @BeforeAll 
-   public void setUp() throws Exception {
+   void setUp() throws Exception {
       settings = new Settings();
    }
 
    @Test
-   public void TestAddPicture() {
+   void TestAddPicture() {
       list = new PictureList(settings);
       list.addPicture(new Picture("pict1.jpg", "Picture 1"));
       list.addPicture(new Picture("pict2.jpg", "Picture 2"));
@@ -53,7 +53,7 @@ public class PictureListTest {
    }
 
    @Test
-   public void TestGetPicture()
+   void TestGetPicture()
    {
       list = new PictureList(settings);
       list.addPicture(new Picture("pict1.jpg", "Picture 1"));
@@ -66,14 +66,14 @@ public class PictureListTest {
    }
 
    @Test
-   public void TestLoadCatalog() {
+   void TestLoadCatalog() {
       list = new PictureList(settings);
       list.loadCatalog();
       assertTrue(list.getNumberPictures() > 0, "List should contain some pictures.");
    }
 
    @AfterAll
-   static public void tearDown() throws Exception {
+   static void tearDown() throws Exception {
 
    }
 
