@@ -31,12 +31,12 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Tag;
+import com.drew.metadata.exif.ExifDirectoryBase;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -93,9 +93,7 @@ public class Picture {
 
          logger.debug("Image Metadata: {}", metadata);
 
-      } catch (ImageProcessingException e) {
-         logger.error("Error reading image metadata.", e);
-      } catch (IOException e) {
+      } catch (ImageProcessingException | IOException e) {
          logger.error("Error reading image metadata.", e);
       }
 
@@ -157,7 +155,8 @@ public class Picture {
          int imageWidth = image.getWidth(null);
          int imageHeight = image.getHeight(null);
          // Make sure the aspect ratio is maintained, so the image is not distorted
-         logger.info("Scaling the image to {} x {} from {} x {}", newWidth, newHeight, imageWidth, imageHeight);
+         logger.info("Scaling the image to {} x {} from {} x {}", newWidth, newHeight, imageWidth,
+               imageHeight);
          double thumbRatio = (double) newWidth / (double) newHeight;
          double aspectRatio = (double) imageWidth / (double) imageHeight;
 
@@ -169,7 +168,7 @@ public class Picture {
             newWidth = (int) (newHeight * aspectRatio);
          }
 
-         logger.debug("New scaled image will be {} x {}",  newWidth, newHeight);
+         logger.debug("New scaled image will be {} x {}", newWidth, newHeight);
 
          // Draw the scaled image
          BufferedImage newImage =
@@ -192,13 +191,10 @@ public class Picture {
       int orientation = 1;
 
       try {
-
-         if (meta != null) {
-            if (meta.containsDirectoryOfType(ExifIFD0Directory.class)) {
-               // Get the current orientation of the image
-               Directory directory = meta.getFirstDirectoryOfType(ExifIFD0Directory.class);
-               orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
-            }
+         if (meta != null && meta.containsDirectoryOfType(ExifIFD0Directory.class)) {
+            // Get the current orientation of the image
+            Directory directory = meta.getFirstDirectoryOfType(ExifIFD0Directory.class);
+            orientation = directory.getInt(ExifDirectoryBase.TAG_ORIENTATION);
          }
       } catch (MetadataException e) {
          logger.error("Metadata error reading orientation", e);
@@ -266,13 +262,15 @@ public class Picture {
       Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
       BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
       Graphics2D g2d = resized.createGraphics();
-      g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR); 
+      g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+            RenderingHints.VALUE_INTERPOLATION_BILINEAR);
       g2d.drawImage(tmp, 0, 0, null);
       g2d.dispose();
       return resized;
    }
 
-   private static BufferedImage transform(BufferedImage input, int outputWidth, int outputHeight, AffineTransform transform) {
+   private static BufferedImage transform(BufferedImage input, int outputWidth, int outputHeight,
+         AffineTransform transform) {
 
       BufferedImage output;
 

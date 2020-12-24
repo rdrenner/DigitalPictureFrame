@@ -26,10 +26,8 @@
 package com.github.rdrenner.digitalpictureframe;
 
 import java.util.ArrayList;
-import java.nio.file.FileVisitResult.*;
 import java.nio.file.SimpleFileVisitor;
 import java.io.Serializable;
-import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
