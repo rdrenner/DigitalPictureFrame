@@ -155,7 +155,7 @@ public class Picture {
          int imageWidth = image.getWidth(null);
          int imageHeight = image.getHeight(null);
          // Make sure the aspect ratio is maintained, so the image is not distorted
-         logger.info("Scaling the image to {} x {} from {} x {}", newWidth, newHeight, imageWidth,
+         logger.debug("Scaling the image to {} x {} from {} x {}", newWidth, newHeight, imageWidth,
                imageHeight);
          double thumbRatio = (double) newWidth / (double) newHeight;
          double aspectRatio = (double) imageWidth / (double) imageHeight;

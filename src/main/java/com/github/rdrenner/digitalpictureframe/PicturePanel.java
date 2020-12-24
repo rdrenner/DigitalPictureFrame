@@ -97,7 +97,7 @@ public class PicturePanel extends JPanel {
          x = (screenSize.width - image.getWidth()) / 2;
       }
 
-      logger.info("Drawing Picture Image at ({},{}).", x, y);
+      logger.debug("Drawing Picture Image at ({},{}).", x, y);
       super.paintComponent(g);
       g.drawImage(image, x, y, this); // see javadoc for more info on the parameters
    }
