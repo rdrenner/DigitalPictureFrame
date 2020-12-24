@@ -23,6 +23,12 @@
          </includes>
       </fileSet>
       <fileSet>
+         <includes>
+             <include>DigitalPictureFrame.sh</include>
+         </includes>
+         <fileMode>0755</fileMode>
+      </fileSet>      
+      <fileSet>
          <directory>target</directory>
          <outputDirectory>./</outputDirectory>
          <includes>
