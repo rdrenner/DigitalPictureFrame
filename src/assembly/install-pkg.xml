@@ -7,24 +7,18 @@
       <format>tar.gz</format>
       <format>tar.bz2</format>
    </formats>
-   <files>
-      <file>
-         <source>${project.basedir}/conf/DigitalPictureFrame.properties</source>
-         <outputDirectory>conf</outputDirectory>
-         <destName>DigitalPictureFrame.properties</destName>
-      </file>
-   </files>
    <fileSets>
       <fileSet>
          <includes>
             <include>README*</include>
             <include>LICENSE*</include>
             <include>SampleImages/*</include>
+            <include>conf/*</include>
          </includes>
       </fileSet>
       <fileSet>
          <includes>
-             <include>DigitalPictureFrame.sh</include>
+             <include>*.sh</include>
          </includes>
          <fileMode>0755</fileMode>
       </fileSet>      

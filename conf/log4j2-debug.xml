@@ -20,8 +20,8 @@
 	</Appenders>
 	
 	<Loggers>
-		<Logger name="com.github.rdrenner" level="warn" >
-			<appender-ref ref="file-log" level="warn" />
+		<Logger name="com.github.rdrenner" level="debug" >
+			<appender-ref ref="file-log" level="debug" />
 		</Logger>
 		<Root level="error">
 			<AppenderRef ref="Console" />
